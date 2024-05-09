@@ -1,6 +1,5 @@
 'use client'
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 interface AuthContextType {
     token: string | null;
     setToken: (token: string | null) => void;
@@ -12,8 +11,10 @@ interface AuthProviderProps {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children },redirectUrl = '/login') => {
     const [token, setToken] = useState<string | null>(null);
+
 
     return (
         <AuthContext.Provider value={{ token, setToken }}>
